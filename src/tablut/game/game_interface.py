@@ -12,6 +12,5 @@ class ChessGameInterface:
     def __get_movement(self):
         pass
 
-
     def start_game(self):
         pass
