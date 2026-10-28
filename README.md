@@ -1,6 +1,38 @@
 # Tablut-Challenge
 Repository of my project focused on creating a system that can play the game Tablut.
 
+## Development Setup
+
+The project uses [uv](https://docs.astral.sh/uv/) for Python and dependency management, and [Ruff](https://docs.astral.sh/ruff/) for linting and formatting.
+
+### uv
+
+```bash
+uv sync                  # create .venv and install all dependencies
+uv run tablut-challenge  # run the project entry point
+uv add <package>         # add a dependency
+uv add --dev <package>   # add a dev-only dependency
+uv remove <package>      # remove a dependency
+```
+
+- `pyproject.toml` — project metadata and dependencies
+- `uv.lock` — locked versions, commit it
+- `.python-version` — Python version used by uv (3.12)
+
+### Ruff
+
+```bash
+uv run ruff check .          # lint
+uv run ruff check --fix .    # lint and auto-fix
+uv run ruff format .         # format
+```
+
+Ruff rules live in `pyproject.toml` under `[tool.ruff]`.
+
+### VS Code
+
+Install the recommended extensions in `.vscode/extensions.json`, mainly [Ruff](https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff). Files are then formatted, fixed and import-sorted automatically on save (`cmd + s`).
+
 ## Commit Convention
 
 Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
