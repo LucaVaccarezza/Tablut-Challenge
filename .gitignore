@@ -24,3 +24,5 @@ wheels/
 .vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
+
+TablutCompetition
