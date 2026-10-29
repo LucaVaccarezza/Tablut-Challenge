@@ -1,6 +1,5 @@
-import logging
-
-from tablut.network.socket_slient import SocketClient
+from tablut.common.enums.player import ROLE
+from tablut.network.socket_client import SocketClient
 
 
 def start_game(client):
@@ -10,7 +9,7 @@ def start_game(client):
 
 
 if __name__ == "__main__":
-    client = SocketClient("Black", host="localhost", port=5801, level=logging.DEBUG)
+    client = SocketClient(ROLE.BLACK, name="Black")
     client.connect()
     client.send_name("BlackTest")
     start_game(client)

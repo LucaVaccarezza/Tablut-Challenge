@@ -3,6 +3,8 @@ import socket
 import struct
 from typing import Any
 
+from tablut.common.enums.player import ROLE
+from tablut.common.types.receive_state import ReceiveStateType
 from tablut.network.errors import ConnectionClosedError, ProtocolError
 from tablut.utils.logger import Logger
 
@@ -14,14 +16,13 @@ _CONNECT_TIMEOUT = 10.0
 class SocketClient:
     def __init__(
         self,
+        role: ROLE,
         name: str = "SocketClient",
         host: str = "localhost",
-        port: int = 5800,
-        level: int | None = None,
     ) -> None:
-        self.logger = Logger(name, level)
+        self.logger = Logger(name)
         self.host = host
-        self.port = port
+        self.port = 5800 if role == ROLE.WHITE else 5801
         self.sock: socket.socket | None = None
 
     def connect(self) -> None:
@@ -54,7 +55,7 @@ class SocketClient:
         self._send_message(player_name)
         self.logger.info(f"Declared name: {player_name}")
 
-    def receive_state(self) -> dict[str, Any]:
+    def receive_state(self) -> ReceiveStateType:
         """Block until one full state message arrives and return it as a dict."""
         self.logger.debug("Waiting to receive state...")
         header = self._recv_exact(_LENGTH_PREFIX_SIZE)
@@ -67,7 +68,9 @@ class SocketClient:
         except (UnicodeDecodeError, json.JSONDecodeError) as e:
             raise ProtocolError(f"Invalid state payload: {e}") from e
         self.logger.debug(f"Received state: {state}")
-        return state
+
+        # FIXME: transform the data
+        return ReceiveStateType.model_validate(state)
 
     def _send_message(self, obj: Any) -> None:
         payload = json.dumps(obj).encode("utf-8")

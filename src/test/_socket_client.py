@@ -1,4 +1,5 @@
-from tablut.network.socket_slient import SocketClient
+from tablut.common.enums.player import ROLE
+from tablut.network.socket_client import SocketClient
 
 
 def start_game(client):
@@ -8,6 +9,6 @@ def start_game(client):
 
 
 if __name__ == "__main__":
-    client = SocketClient()
+    client = SocketClient(ROLE.WHITE)
     client.connect()
     start_game(client)

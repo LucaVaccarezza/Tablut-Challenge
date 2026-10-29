@@ -1,6 +1,29 @@
 # Tablut-Challenge
 Repository of my project focused on creating a system that can play the game Tablut.
 
+## Running the Player
+
+The competition launches the player through a single script, `runmyplayer.sh`, with three positional parameters in this exact order:
+
+```bash
+./runmyplayer.sh <ROLE> <TIMEOUT> <SERVER_IP>
+
+# example
+./runmyplayer.sh WHITE 60 192.168.20.101
+```
+
+| # | Parameter | Description |
+|---|-----------|-------------|
+| 1 | `ROLE` | `WHITE` or `BLACK`. Full word, case-insensitive (`wHitE` must work). |
+| 2 | `TIMEOUT` | Seconds allowed per move. May be lower than 60. The referee loses the player on expiry. |
+| 3 | `SERVER_IP` | IP address of the referee server. Never hardcode `localhost`. |
+
+The role selects the referee port: `WHITE` connects to `5800`, `BLACK` to `5801`.
+
+Any additional optional parameter must have a default value and be documented in the delivery `.txt` file.
+
+> `runmyplayer.sh` is still a placeholder: it will be implemented once the network infrastructure is finished.
+
 ## Development Setup
 
 The project uses [uv](https://docs.astral.sh/uv/) for Python and dependency management, and [Ruff](https://docs.astral.sh/ruff/) for linting and formatting.
