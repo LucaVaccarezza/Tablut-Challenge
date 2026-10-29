@@ -56,6 +56,25 @@ Ruff rules live in `pyproject.toml` under `[tool.ruff]`.
 
 Install the recommended extensions in `.vscode/extensions.json`, mainly [Ruff](https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff). Files are then formatted, fixed and import-sorted automatically on save (`cmd + s`).
 
+## Testing
+
+Test individual players during development using the standalone test harnesses in `src/test/`:
+
+```bash
+
+# Terminal 1: Start the Server
+cd path/to/server
+ant gui-server
+
+# Terminal 2: Connect WHITE player first (connects to port 5800)
+uv run python src/test/_test_chess_game_white.py
+
+# Terminal 3: Connect BLACK player second (connects to port 5801)
+uv run python src/test/_test_chess_game_black.py
+```
+
+**Important:** Always connect WHITE first, then BLACK. The referee waits for both players to connect before starting the game.
+
 ## Commit Convention
 
 Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
