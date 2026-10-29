@@ -53,7 +53,10 @@ class SocketClient:
     def send_name(self, player_name: str) -> None:
         """Declare the player name: the first message the referee expects."""
         self._send_message(player_name)
-        self.logger.info(f"Declared name: {player_name}")
+
+    def send_move(self, move_from, move_to, role) -> None:
+        """Send a move to the server."""
+        self._send_message({"from": move_from, "to": move_to, "turn": role})
 
     def receive_state(self) -> ReceiveStateType:
         """Block until one full state message arrives and return it as a dict."""
@@ -69,7 +72,6 @@ class SocketClient:
             raise ProtocolError(f"Invalid state payload: {e}") from e
         self.logger.debug(f"Received state: {state}")
 
-        # FIXME: transform the data
         return ReceiveStateType.model_validate(state)
 
     def _send_message(self, obj: Any) -> None:

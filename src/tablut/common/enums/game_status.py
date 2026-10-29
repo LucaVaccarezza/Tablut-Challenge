@@ -2,7 +2,8 @@ from enum import Enum
 
 
 class GAME_STATUS(Enum):
-    INITIAL = "INITIAL"
-    FINISHED = "FINISH"
+    UNINITIALIZED = "UNINITIALIZED"
+    INITIALIZED = "INITIALIZED"
+    FINISHED = "FINISHED"
     WAIT = "WAIT"
     PLAY = "PLAY"
