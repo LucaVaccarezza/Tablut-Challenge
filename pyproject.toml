@@ -6,10 +6,15 @@ authors = [
     { name = "mengxian0913", email = "mengxian0913@gmail.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "pydantic>=2.14.1",
+]
 
 [project.scripts]
 tablut-challenge = "tablut_challenge:main"
+
+[tool.uv.build-backend]
+module-name = "tablut"
 
 [build-system]
 requires = ["uv_build>=0.12.15,<0.13.0"]
